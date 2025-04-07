@@ -1,17 +1,21 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useLanguage } from './LanguageContext';
 
 // Create context
 const ExcuseContext = createContext();
 
 // Custom hook to use the excuse context
 export const useExcuse = () => useContext(ExcuseContext);
-
 // Provider component
 export const ExcuseProvider = ({ children }) => {
+  // Get language context
+  const { language } = useLanguage();
+  
   // State for form inputs
   const [tone, setTone] = useState('balanced'); // 'serious', 'balanced', 'funny'
   const [category, setCategory] = useState('work'); // 'work', 'social', 'family'
+  
   
   // State for generated excuse
   const [generatedExcuse, setGeneratedExcuse] = useState('');
@@ -57,7 +61,8 @@ export const ExcuseProvider = ({ children }) => {
       // In a real app, this would call an API
       // For now, we'll use a simple mock implementation
       setTimeout(() => {
-        const excuses = {
+        // English excuses
+        const excusesEn = {
           work: {
             serious: [
               "I've been called into an urgent meeting with the leadership team regarding a critical project issue.",
@@ -110,6 +115,119 @@ export const ExcuseProvider = ({ children }) => {
             ]
           }
         };
+        
+        // Danish excuses
+        const excusesDa = {
+          work: {
+            serious: [
+              "Jeg er blevet indkaldt til et akut møde med ledelsesteamet vedrørende et kritisk projektproblem.",
+              "Vores sikkerhedsteam har opdaget usædvanlig aktivitet på min konto, der kræver øjeblikkelig opmærksomhed.",
+              "Jeg skal håndtere et uventet compliance-problem, der lige er opstået med vores seneste implementering."
+            ],
+            balanced: [
+              "Jeg har en konfliktende deadline for en højprioriteret leverance, der lige er blevet rykket frem.",
+              "Jeg er blevet bedt om at deltage i et opkald med en vigtig kunde, der har problemer med vores service.",
+              "Der er en uventet systemmigration i gang, der kræver mit tilsyn."
+            ],
+            funny: [
+              "Mit tastatur gør oprør og vil kun skrive i emoji. 🔥💻😱",
+              "Min produktivitetsalgoritme har fastslået, at dette møde er i konflikt med mit optimale kaffe-til-arbejde-forhold.",
+              "Min virtuelle assistent har planlagt obligatorisk kattevideoanalyse på det tidspunkt."
+            ]
+          },
+          social: {
+            serious: [
+              "Jeg har oplevet nogle bekymrende helbredssymptomer, der kræver øjeblikkelig lægehjælp.",
+              "Der er opstået en familienødsituation, der kræver min øjeblikkelige opmærksomhed og støtte.",
+              "Min lejlighed har et VVS-problem, der forårsager skade, og jeg skal mødes med akut vedligeholdelse."
+            ],
+            balanced: [
+              "Jeg har dobbeltbooket mig selv med en anden forpligtelse, som jeg ikke kan ændre.",
+              "Min bil har problemer, og jeg skal tage den til mekanikeren i det tidsrum.",
+              "Jeg forventer en vigtig levering, der kræver en underskrift."
+            ],
+            funny: [
+              "Min guldfisk har en eksistentiel krise og har brug for følelsesmæssig støtte.",
+              "Jeg er blevet udvalgt til en tilfældig rumvæsensbortførelse den dag - det stod med småt, da jeg tilmeldte mig den gratis prøveperiode.",
+              "Mine stueplanter har dannet en fagforening og planlagt obligatoriske forhandlingssamtaler på det tidspunkt."
+            ]
+          },
+          family: {
+            serious: [
+              "Min læge har rådet mig til at hvile på grund af bekymrende symptomer, jeg har oplevet.",
+              "Der er en akut sag med min ældre forælder, der kræver min øjeblikkelige opmærksomhed.",
+              "Jeg skal tage mig af et uventet problem med mit barns skole/sundhedspleje."
+            ],
+            balanced: [
+              "Jeg har en tidligere planlagt aftale, som jeg ikke kan ændre med kort varsel.",
+              "Mit barn skal hentes tidligt fra skole/børnehave den dag.",
+              "Jeg har nogle slægtninge fra udenbys, der ankommer uventet, som jeg skal hjælpe."
+            ],
+            funny: [
+              "Mine stueplanter er blevet bevidste og kræver, at jeg læser godnathistorier for dem.",
+              "Mit køleskab og min mikrobølgeovn har relationsproblemer, og jeg er blevet udnævnt til deres mægler.",
+              "Jeg er blevet udvalgt som deltager i en flash mob-træningssession, der ikke kan ændres."
+            ]
+          }
+        };
+        
+        // Norwegian excuses
+        const excusesNo = {
+          work: {
+            serious: [
+              "Jeg har blitt innkalt til et hastemøte med lederteamet angående et kritisk prosjektproblem.",
+              "Sikkerhetsteamet vårt har oppdaget uvanlig aktivitet på kontoen min som krever umiddelbar oppmerksomhet.",
+              "Jeg må ta tak i et uventet compliance-problem som nettopp har dukket opp med vår siste implementering."
+            ],
+            balanced: [
+              "Jeg har en konflikterende frist for en høyt prioritert leveranse som nettopp ble flyttet frem.",
+              "Jeg har blitt bedt om å delta i et samtale med en viktig klient som har problemer med tjenesten vår.",
+              "Det er en uventet systemmigrasjon som pågår som krever mitt tilsyn."
+            ],
+            funny: [
+              "Tastaturet mitt gjør opprør og vil bare skrive i emoji. 🔥💻😱",
+              "Min produktivitetsalgoritme har bestemt at dette møtet er i konflikt med mitt optimale kaffe-til-arbeid-forhold.",
+              "Min virtuelle assistent har planlagt obligatorisk kattevideo-forskning på akkurat det tidspunktet."
+            ]
+          },
+          social: {
+            serious: [
+              "Jeg har opplevd noen bekymringsfulle helsesymptomer som krever umiddelbar medisinsk oppmerksomhet.",
+              "En familiekrise har oppstått som krever min umiddelbare oppmerksomhet og støtte.",
+              "Leiligheten min har et rørleggerproblem som forårsaker skade, og jeg må møte nødvedlikehold."
+            ],
+            balanced: [
+              "Jeg har dobbeltbooket meg selv med en annen forpliktelse som jeg ikke kan endre.",
+              "Bilen min har problemer, og jeg må ta den til mekanikeren i det tidsrommet.",
+              "Jeg forventer en viktig levering som krever en signatur."
+            ],
+            funny: [
+              "Gullfisken min har en eksistensiell krise og trenger følelsesmessig støtte.",
+              "Jeg har blitt valgt ut til en tilfeldig romvesensbortføring den dagen - det stod med liten skrift da jeg meldte meg på den gratis prøveperioden.",
+              "Plantene mine har dannet en fagforening og planlagt obligatoriske forhandlingssamtaler på akkurat det tidspunktet."
+            ]
+          },
+          family: {
+            serious: [
+              "Jeg har blitt rådet av legen min til å hvile på grunn av bekymringsfulle symptomer jeg har opplevd.",
+              "Det er en akutt sak med min eldre forelder som krever min umiddelbare oppmerksomhet.",
+              "Jeg må ta meg av et uventet problem med barnets skole/helsevesen."
+            ],
+            balanced: [
+              "Jeg har en tidligere planlagt avtale som jeg ikke kan endre på kort varsel.",
+              "Barnet mitt må hentes tidlig fra skole/barnehage den dagen.",
+              "Jeg har noen slektninger fra utenbys som ankommer uventet som jeg må hjelpe."
+            ],
+            funny: [
+              "Plantene mine har blitt bevisste og krever at jeg leser godnattshistorier for dem.",
+              "Kjøleskapet og mikrobølgeovnen min har relasjonsproblemer, og jeg har blitt utnevnt til deres megler.",
+              "Jeg har blitt valgt ut som deltaker i en flash mob-treningsøkt som ikke kan endres."
+            ]
+          }
+        };
+        
+        // Select excuses based on language
+        const excuses = language === 'da' ? excusesDa : language === 'no' ? excusesNo : excusesEn;
         
         // Get random excuse based on category and tone
         const categoryExcuses = excuses[category];

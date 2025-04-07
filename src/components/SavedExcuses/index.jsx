@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../context/ExcuseContext';
+import { useLanguage } from '../../context/LanguageContext';
 import ExcuseList from './ExcuseList';
 
 const SavedExcusesContainer = styled.div`
@@ -96,17 +97,18 @@ const EmptyStateButton = styled.button`
   }
 `;
 
-const categories = [
-  { id: 'all', label: 'All' },
-  { id: 'work', label: 'Work' },
-  { id: 'social', label: 'Social' },
-  { id: 'family', label: 'Family' }
-];
-
 const SavedExcuses = () => {
   const { savedExcuses } = useExcuse();
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
   
+  const categories = [
+    { id: 'all', label: t.all },
+    { id: 'work', label: t.work },
+    { id: 'social', label: t.social },
+    { id: 'family', label: t.family }
+  ];
+
   const filteredExcuses = activeFilter === 'all'
     ? savedExcuses
     : savedExcuses.filter(excuse => excuse.category === activeFilter);
@@ -123,12 +125,12 @@ const SavedExcuses = () => {
       transition={{ duration: 0.5 }}
     >
       <SavedExcusesContainer>
-        <Title>Your Saved Excuses</Title>
+        <Title>{t.yourSavedExcuses}</Title>
         
         {savedExcuses.length > 0 ? (
           <>
             <FilterContainer>
-              <FilterLabel>Filter by Category</FilterLabel>
+              <FilterLabel>{t.filterByCategory}</FilterLabel>
               <FilterOptions>
                 {categories.map(cat => (
                   <FilterOption
@@ -148,10 +150,10 @@ const SavedExcuses = () => {
           <EmptyState>
             <EmptyStateIcon>📝</EmptyStateIcon>
             <EmptyStateText>
-              You haven't saved any excuses yet. Generate some excuses and save your favorites!
+              {t.noSavedExcuses}
             </EmptyStateText>
             <EmptyStateButton as="a" href="/">
-              Generate Excuses
+              {t.generateExcuses}
             </EmptyStateButton>
           </EmptyState>
         )}

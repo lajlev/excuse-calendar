@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../../context/ExcuseContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const SelectorContainer = styled.div`
   flex: 1;
@@ -48,15 +49,16 @@ const CategoryOption = styled.button`
   }
 `;
 
-const categories = [
-  { id: 'work', label: 'Work' },
-  { id: 'social', label: 'Social' },
-  { id: 'family', label: 'Family' }
-];
-
 const CategorySelector = () => {
   const { category, setCategory } = useExcuse();
+  const { t } = useLanguage();
   
+  const categories = [
+    { id: 'work', label: t.work },
+    { id: 'social', label: t.social },
+    { id: 'family', label: t.family }
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -64,7 +66,7 @@ const CategorySelector = () => {
       transition={{ duration: 0.3, delay: 0.1 }}
     >
       <SelectorContainer>
-        <Label>Excuse Category</Label>
+        <Label>{t.excuseCategory}</Label>
         <CategoryOptions>
           {categories.map(cat => (
             <CategoryOption

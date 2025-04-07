@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../../context/ExcuseContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const ButtonContainer = styled.div`
   margin: 1rem 0;
@@ -58,6 +59,7 @@ const LoadingSpinner = styled.div`
 
 const GenerateButton = () => {
   const { generateExcuse, isGenerating } = useExcuse();
+  const { t } = useLanguage();
   
   
   return (
@@ -73,11 +75,11 @@ const GenerateButton = () => {
         >
           {isGenerating ? (
             <>
-              Generating
+              {t.generating}
               <LoadingSpinner />
             </>
           ) : (
-            'Generate Excuse'
+            t.generateExcuse
           )}
         </Button>
       </ButtonContainer>

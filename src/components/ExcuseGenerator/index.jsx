@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../context/ExcuseContext';
+import { useLanguage } from '../../context/LanguageContext';
 import ToneSelector from './ToneSelector';
 import CategorySelector from './CategorySelector';
 import GenerateButton from './GenerateButton';
@@ -41,6 +42,7 @@ const ControlsRow = styled.div`
 
 const ExcuseGenerator = () => {
   const { generatedExcuse } = useExcuse();
+  const { t } = useLanguage();
   
   return (
     <motion.div
@@ -49,6 +51,7 @@ const ExcuseGenerator = () => {
       transition={{ duration: 0.5 }}
     >
       <ExcuseGeneratorContainer>
+        <Title>{t.generateYourExcuse}</Title>
         
         <Form>
           

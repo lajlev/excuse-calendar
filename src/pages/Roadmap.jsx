@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useLanguage } from '../context/LanguageContext';
 
 const RoadmapContainer = styled.div`
   max-width: 800px;
@@ -60,6 +61,8 @@ const FeatureDescription = styled.p`
 `;
 
 const Roadmap = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="roadmap-page">
       <Header />
@@ -70,66 +73,66 @@ const Roadmap = () => {
           transition={{ duration: 0.5 }}
         >
           <RoadmapContainer>
-            <Title>Excuse Calendar Roadmap</Title>
+            <Title>{t.excuseCalendarRoadmap}</Title>
             
             <Section>
-              <SectionTitle>Current Features</SectionTitle>
+              <SectionTitle>{t.currentFeatures}</SectionTitle>
               <FeatureList>
                 <FeatureItem completed>
                   <FeatureTitle>Excuse Generation</FeatureTitle>
-                  <FeatureDescription>Generate excuses based on category and tone preferences.</FeatureDescription>
+                  <FeatureDescription>{t.excuseGenerationDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem completed>
                   <FeatureTitle>Save Favorites</FeatureTitle>
-                  <FeatureDescription>Save your favorite excuses for later use.</FeatureDescription>
+                  <FeatureDescription>{t.saveFavoritesDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem completed>
                   <FeatureTitle>Copy to Clipboard</FeatureTitle>
-                  <FeatureDescription>Easily copy excuses to your clipboard with one click.</FeatureDescription>
+                  <FeatureDescription>{t.copyToClipboardDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem completed>
                   <FeatureTitle>Mobile Responsive</FeatureTitle>
-                  <FeatureDescription>Fully responsive design that works on all devices.</FeatureDescription>
+                  <FeatureDescription>{t.mobileResponsiveDesc}</FeatureDescription>
                 </FeatureItem>
               </FeatureList>
             </Section>
             
             <Section>
-              <SectionTitle>Coming Soon</SectionTitle>
+              <SectionTitle>{t.comingSoon}</SectionTitle>
               <FeatureList>
                 <FeatureItem inProgress>
                   <FeatureTitle>AI-Powered Excuses</FeatureTitle>
-                  <FeatureDescription>Integration with AI to generate even more creative and personalized excuses.</FeatureDescription>
+                  <FeatureDescription>{t.aiPoweredExcusesDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem inProgress>
                   <FeatureTitle>Calendar Integration</FeatureTitle>
-                  <FeatureDescription>Connect with your calendar to generate excuses for specific events.</FeatureDescription>
+                  <FeatureDescription>{t.calendarIntegrationDesc}</FeatureDescription>
                 </FeatureItem>
               </FeatureList>
             </Section>
             
             <Section>
-              <SectionTitle>Future Plans</SectionTitle>
+              <SectionTitle>{t.futurePlans}</SectionTitle>
               <FeatureList>
                 <FeatureItem>
                   <FeatureTitle>User Accounts</FeatureTitle>
-                  <FeatureDescription>Create an account to sync your saved excuses across devices.</FeatureDescription>
+                  <FeatureDescription>{t.userAccountsDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem>
                   <FeatureTitle>Excuse Templates</FeatureTitle>
-                  <FeatureDescription>Create and save your own excuse templates.</FeatureDescription>
+                  <FeatureDescription>{t.excuseTemplatesDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem>
                   <FeatureTitle>Sharing Options</FeatureTitle>
-                  <FeatureDescription>Share your excuses directly via email, messaging apps, or social media.</FeatureDescription>
+                  <FeatureDescription>{t.sharingOptionsDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem>
                   <FeatureTitle>Excuse Analytics</FeatureTitle>
-                  <FeatureDescription>Track which excuses work best for different situations.</FeatureDescription>
+                  <FeatureDescription>{t.excuseAnalyticsDesc}</FeatureDescription>
                 </FeatureItem>
                 <FeatureItem>
                   <FeatureTitle>Dark Mode</FeatureTitle>
-                  <FeatureDescription>Toggle between light and dark themes for comfortable use at any time.</FeatureDescription>
+                  <FeatureDescription>{t.darkModeDesc}</FeatureDescription>
                 </FeatureItem>
               </FeatureList>
             </Section>

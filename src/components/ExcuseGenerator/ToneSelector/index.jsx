@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../../context/ExcuseContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const SelectorContainer = styled.div`
   flex: 1;
@@ -67,6 +68,7 @@ const CurrentTone = styled.div`
 
 const ToneSelector = () => {
   const { tone, setTone } = useExcuse();
+  const { t } = useLanguage();
   
   const handleToneChange = (e) => {
     const value = Number.parseInt(e.target.value, 10);
@@ -82,9 +84,9 @@ const ToneSelector = () => {
   };
   
   const getToneLabel = () => {
-    if (tone === 'serious') return 'Serious & Believable';
-    if (tone === 'balanced') return 'Balanced';
-    return 'Funny & Creative';
+    if (tone === 'serious') return t.seriousAndBelievable;
+    if (tone === 'balanced') return t.balanced;
+    return t.funnyAndCreative;
   };
   
   return (
@@ -94,11 +96,11 @@ const ToneSelector = () => {
       transition={{ duration: 0.3, delay: 0.2 }}
     >
       <SelectorContainer>
-        <Label>Excuse Tone</Label>
+        <Label>{t.excuseTone}</Label>
         <SliderContainer>
           <SliderLabels>
-            <span>Serious</span>
-            <span>Funny</span>
+            <span>{t.serious}</span>
+            <span>{t.funny}</span>
           </SliderLabels>
           <Slider
             type="range"

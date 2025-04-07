@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
+import LanguageSelector from '../LanguageSelector';
 
 const HeaderContainer = styled.header`
   background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
@@ -16,6 +18,11 @@ const Nav = styled.nav`
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+`;
+
+const NavGroup = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Logo = styled.div`
@@ -122,6 +129,7 @@ const NavLink = styled(Link)`
 const Header = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -141,21 +149,24 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              🗓️ Excuse Calendar
+              🤞 Excuse Calendar
             </motion.span>
           </Link>
         </Logo>
-        <NavLinks>
-          <NavLink to="/" active={location.pathname === '/' ? 1 : 0}>
-            Generate
-          </NavLink>
-          <NavLink to="/saved" active={location.pathname === '/saved' ? 1 : 0}>
-            Saved Excuses
-          </NavLink>
-          <NavLink to="/roadmap" active={location.pathname === '/roadmap' ? 1 : 0}>
-            Roadmap
-          </NavLink>
-        </NavLinks>
+        <NavGroup>
+          <NavLinks>
+            <NavLink to="/" active={location.pathname === '/' ? 1 : 0}>
+              {t.generate}
+            </NavLink>
+            <NavLink to="/saved" active={location.pathname === '/saved' ? 1 : 0}>
+              {t.savedExcuses}
+            </NavLink>
+            <NavLink to="/roadmap" active={location.pathname === '/roadmap' ? 1 : 0}>
+              {t.roadmap}
+            </NavLink>
+          </NavLinks>
+          <LanguageSelector />
+        </NavGroup>
         <MobileMenuButton onClick={toggleMobileMenu}>
           {mobileMenuOpen ? '✕' : '☰'}
         </MobileMenuButton>
@@ -182,22 +193,24 @@ const Header = () => {
                   active={location.pathname === '/' ? 1 : 0}
                   onClick={closeMobileMenu}
                 >
-                  Generate
+                  {t.generate}
                 </MobileNavLink>
                 <MobileNavLink
                   to="/saved"
                   active={location.pathname === '/saved' ? 1 : 0}
                   onClick={closeMobileMenu}
                 >
-                  Saved Excuses
+                  {t.savedExcuses}
                 </MobileNavLink>
                 <MobileNavLink
                   to="/roadmap"
                   active={location.pathname === '/roadmap' ? 1 : 0}
                   onClick={closeMobileMenu}
                 >
-                  Roadmap
+                  {t.roadmap}
                 </MobileNavLink>
+                
+                <LanguageSelector isMobile={true} />
               </MobileNavLinks>
             </MobileMenu>
           </MobileMenuOverlay>

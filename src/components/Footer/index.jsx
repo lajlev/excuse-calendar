@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLanguage } from '../../context/LanguageContext';
 
 const FooterContainer = styled.footer`
   background-color: #f8f9fa;
@@ -44,19 +45,19 @@ const Disclaimer = styled.p`
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
   
   return (
     <FooterContainer>
       <FooterContent>
         <Copyright>
-          &copy; {currentYear} Excuse Calendar. All rights reserved.
+          &copy; {currentYear} Excuse Calendar. {t.allRightsReserved}
         </Copyright>
         <Credit>
-          Inspired by <a href="https://fiveideasaday.com" target="_blank" rel="noopener noreferrer">Dave at fiveideasaday.com</a>
+          {t.inspiredBy} <a href="https://fiveideasaday.com" target="_blank" rel="noopener noreferrer">Dave at fiveideasaday.com</a>
         </Credit>
         <Disclaimer>
-          Disclaimer: Use these excuses at your own risk. We are not responsible for any awkward situations,
-          raised eyebrows, or sudden promotions that may result from their use.
+          {t.disclaimer}
         </Disclaimer>
       </FooterContent>
     </FooterContainer>

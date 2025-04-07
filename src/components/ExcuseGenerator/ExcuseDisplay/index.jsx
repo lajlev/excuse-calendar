@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../../context/ExcuseContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const DisplayContainer = styled.div`
   margin-top: 2rem;
@@ -44,6 +45,7 @@ const ActionButton = styled.button`
 
 const ExcuseDisplay = () => {
   const { generatedExcuse, saveExcuse, copyExcuseToClipboard } = useExcuse();
+  const { t } = useLanguage();
   
   const handleCopy = () => {
     copyExcuseToClipboard(generatedExcuse);
@@ -60,10 +62,10 @@ const ExcuseDisplay = () => {
         
         <ActionsContainer>
           <ActionButton onClick={handleCopy}>
-            <span>📋</span> Copy
+            <span>📋</span> {t.copy}
           </ActionButton>
           <ActionButton primary onClick={saveExcuse}>
-            <span>💾</span> Save
+            <span>💾</span> {t.save}
           </ActionButton>
         </ActionsContainer>
       </DisplayContainer>

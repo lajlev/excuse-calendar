@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../../context/ExcuseContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 const Card = styled.div`
   background-color: #f8f9fa;
@@ -94,10 +95,12 @@ const ActionButton = styled.button`
 
 const ExcuseCard = ({ excuse }) => {
   const { deleteExcuse, copyExcuseToClipboard } = useExcuse();
+  const { language, t } = useLanguage();
   
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', {
+    const locale = language === 'da' ? 'da-DK' : language === 'no' ? 'nb-NO' : 'en-US';
+    return new Intl.DateTimeFormat(locale, {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -118,7 +121,7 @@ const ExcuseCard = ({ excuse }) => {
     <Card category={excuse.category}>
       <CardHeader>
         <Category category={excuse.category}>
-          {excuse.category.charAt(0).toUpperCase() + excuse.category.slice(1)}
+          {t[excuse.category]}
         </Category>
       </CardHeader>
       
@@ -127,7 +130,7 @@ const ExcuseCard = ({ excuse }) => {
       <CardFooter>
         <Timestamp>{formatDate(excuse.timestamp)}</Timestamp>
         <Actions>
-          <ActionButton onClick={handleCopy} title="Copy to clipboard">
+          <ActionButton onClick={handleCopy} title={t.copy}>
             📋
           </ActionButton>
           <ActionButton delete onClick={handleDelete} title="Delete excuse">
