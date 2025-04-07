@@ -57,9 +57,8 @@ const LoadingSpinner = styled.div`
 `;
 
 const GenerateButton = () => {
-  const { meetingTitle, generateExcuse, isGenerating } = useExcuse();
+  const { generateExcuse, isGenerating } = useExcuse();
   
-  const isDisabled = !meetingTitle.trim() || isGenerating;
   
   return (
     <motion.div
@@ -70,7 +69,7 @@ const GenerateButton = () => {
       <ButtonContainer>
         <Button 
           onClick={generateExcuse}
-          disabled={isDisabled}
+          disabled={isGenerating}
         >
           {isGenerating ? (
             <>

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useExcuse } from '../../context/ExcuseContext';
-import MeetingInput from './MeetingInput';
 import ToneSelector from './ToneSelector';
 import CategorySelector from './CategorySelector';
 import GenerateButton from './GenerateButton';
@@ -50,10 +49,8 @@ const ExcuseGenerator = () => {
       transition={{ duration: 0.5 }}
     >
       <ExcuseGeneratorContainer>
-        <Title>Generate Your Perfect Excuse</Title>
         
         <Form>
-          {/* <MeetingInput /> */}
           
           <ControlsRow>
             <CategorySelector />

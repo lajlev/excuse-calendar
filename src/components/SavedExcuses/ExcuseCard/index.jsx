@@ -26,16 +26,10 @@ const Card = styled.div`
 
 const CardHeader = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-end;
   margin-bottom: 1rem;
 `;
 
-const MeetingTitle = styled.h3`
-  font-size: 1.1rem;
-  color: #343a40;
-  margin: 0;
-`;
 
 const Category = styled.span`
   font-size: 0.8rem;
@@ -123,7 +117,6 @@ const ExcuseCard = ({ excuse }) => {
   return (
     <Card category={excuse.category}>
       <CardHeader>
-        <MeetingTitle>{excuse.meetingTitle}</MeetingTitle>
         <Category category={excuse.category}>
           {excuse.category.charAt(0).toUpperCase() + excuse.category.slice(1)}
         </Category>

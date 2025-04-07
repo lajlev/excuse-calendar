@@ -10,7 +10,6 @@ export const useExcuse = () => useContext(ExcuseContext);
 // Provider component
 export const ExcuseProvider = ({ children }) => {
   // State for form inputs
-  const [meetingTitle, setMeetingTitle] = useState('');
   const [tone, setTone] = useState('balanced'); // 'serious', 'balanced', 'funny'
   const [category, setCategory] = useState('work'); // 'work', 'social', 'family'
   
@@ -51,7 +50,6 @@ export const ExcuseProvider = ({ children }) => {
   
   // Function to generate an excuse
   const generateExcuse = async () => {
-    if (!meetingTitle.trim()) return;
     
     setIsGenerating(true);
     
@@ -135,7 +133,6 @@ export const ExcuseProvider = ({ children }) => {
     
     const newExcuse = {
       id: uuidv4(),
-      meetingTitle,
       excuse: generatedExcuse,
       category,
       tone,
@@ -164,8 +161,6 @@ export const ExcuseProvider = ({ children }) => {
   
   // Context value
   const value = {
-    meetingTitle,
-    setMeetingTitle,
     tone,
     setTone,
     category,
