@@ -152,6 +152,9 @@ const Header = () => {
           <NavLink to="/saved" active={location.pathname === '/saved' ? 1 : 0}>
             Saved Excuses
           </NavLink>
+          <NavLink to="/roadmap" active={location.pathname === '/roadmap' ? 1 : 0}>
+            Roadmap
+          </NavLink>
         </NavLinks>
         <MobileMenuButton onClick={toggleMobileMenu}>
           {mobileMenuOpen ? '✕' : '☰'}
@@ -187,6 +190,13 @@ const Header = () => {
                   onClick={closeMobileMenu}
                 >
                   Saved Excuses
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/roadmap"
+                  active={location.pathname === '/roadmap' ? 1 : 0}
+                  onClick={closeMobileMenu}
+                >
+                  Roadmap
                 </MobileNavLink>
               </MobileNavLinks>
             </MobileMenu>

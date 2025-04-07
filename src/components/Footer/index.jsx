@@ -17,6 +17,20 @@ const FooterContent = styled.div`
   gap: 0.5rem;
 `;
 
+const Credit = styled.p`
+  color: #6c757d;
+  font-size: 0.8rem;
+  
+  a {
+    color: #6e48aa;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
 const Copyright = styled.p`
   color: #6c757d;
   font-size: 0.9rem;
@@ -37,8 +51,11 @@ const Footer = () => {
         <Copyright>
           &copy; {currentYear} Excuse Calendar. All rights reserved.
         </Copyright>
+        <Credit>
+          Inspired by <a href="https://fiveideasaday.com" target="_blank" rel="noopener noreferrer">Dave at fiveideasaday.com</a>
+        </Credit>
         <Disclaimer>
-          Disclaimer: Use these excuses at your own risk. We are not responsible for any awkward situations, 
+          Disclaimer: Use these excuses at your own risk. We are not responsible for any awkward situations,
           raised eyebrows, or sudden promotions that may result from their use.
         </Disclaimer>
       </FooterContent>
