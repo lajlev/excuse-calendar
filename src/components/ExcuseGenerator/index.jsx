@@ -53,7 +53,7 @@ const ExcuseGenerator = () => {
         <Title>Generate Your Perfect Excuse</Title>
         
         <Form>
-          <MeetingInput />
+          {/* <MeetingInput /> */}
           
           <ControlsRow>
             <CategorySelector />
